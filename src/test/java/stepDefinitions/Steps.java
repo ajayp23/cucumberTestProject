@@ -2,12 +2,16 @@ package stepDefinitions;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+
+import cucumber.api.DataTable;
+import cucumber.api.java.en.And;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
+import utility.Utility;
 
 public class Steps {
     WebDriver driver;
@@ -116,5 +120,23 @@ public class Steps {
         WebElement placeOrder = driver.findElement(By.cssSelector("#place_order"));
         placeOrder.submit();
     }
+
+    @Given("^I send below data in data table$")
+    public void i_send_below_data_in_data_table(DataTable dataTable) throws Throwable {
+        List<List<String>> ls = dataTable.raw();
+        Utility.dataList = ls;
+    }
+
+    @And("^I populate the data in console$")
+    public void i_populate_the_data_in_console() throws Throwable {
+        for (List<String> l: Utility.dataList) {
+            System.out.print("| ");
+            for (String str: l) {
+                System.out.print(str + " | ");
+            }
+            System.out.println();
+        }
+    }
+
 
 }
