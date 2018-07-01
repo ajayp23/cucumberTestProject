@@ -1,10 +1,13 @@
 package stepDefinitions;
 
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
+import cucumber.api.java.en.Then;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -23,6 +26,7 @@ public class Steps {
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.get("http://www.shop.demoqa.com");
+//        System.out.println("Navigated to http://www.shop.demoqa.com");
     }
 
     @When("^he search for 'dress'$")
@@ -135,6 +139,23 @@ public class Steps {
                 System.out.print(str + " | ");
             }
             System.out.println();
+        }
+    }
+
+    @Given("^I make connection to the database$")
+    public Statement createMyCon( ) throws Exception {
+        return Utility.stmt = Utility.createCon();
+    }
+
+    @When("^I execute query to fetch details$")
+    public ResultSet executeStmt() throws Exception {
+        return Utility.rs = Utility.result(Utility.stmt);
+    }
+
+    @Then("^I print the details$")
+    public void printData() throws Exception {
+        while(Utility.rs.next()) {
+            System.out.println(Utility.rs.getInt(1)+"  "+Utility.rs.getString(2)+"  "+Utility.rs.getString(3));
         }
     }
 
