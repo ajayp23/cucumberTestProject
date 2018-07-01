@@ -1,5 +1,5 @@
 Feature: Automated End2End Test with Cucumber
-
+  @Test
   Scenario: Customer places an order
     Given user is on Home Page
     When he search for 'dress'
