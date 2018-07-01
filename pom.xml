@@ -55,7 +55,7 @@
 		  <artifactId>extentreports</artifactId>
 		  <version>3.1.2</version>
 	  </dependency>
-
+	  <!--mvn install:install-file -Dfile="pathTo\ojdbc14.jar" -DgroupId=com.oracle -DartifactId=ojdbc14 -Dversion=10.2.0.1.0 -Dpackaging=jar-->
 	  <dependency>
 		  <groupId>com.oracle</groupId>
 		  <artifactId>ojdbc14</artifactId>
